@@ -1,0 +1,32 @@
+/ {
+	zephyr,user {
+		/* adjust channel number according to pinmux in board.dts */
+		io-channels = <&adc1 0 &adc2 1>; /* adc1 on PA0 and adc2 on PA1 */
+	};
+
+	chosen {
+		zephyr,console = &cdc_acm_uart0;
+	};
+};
+
+&adc1 {
+    status = "okay";
+    pinctrl-0 = <&adc1_in0_pa0>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+
+&adc2 {
+    status = "okay";
+    pinctrl-0 = <&adc2_in1_pa1>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+&zephyr_udc0 {
+    cdc_acm_uart0: cdc_acm_uart0 {
+            compatible = "zephyr,cdc-acm-uart";
+            label = "CDC_ACM_0";
+    };
+};
